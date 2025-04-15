@@ -1,0 +1,34 @@
+import { Image, ScrollView, Text, TextInput, View } from 'react-native';
+import React, { useLayoutEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from 'components/Header';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+const HomeScreen = () => {
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, []);
+
+  return (
+    <SafeAreaView className="pt-5 bg-white">
+      {/* header */}
+      <Header />
+
+      {/* search */}
+      <View className="flex-row items-center px-1 pb-2 mx-4 mt-1 space-x-2">
+        <View className="flex-row items-center flex-1 p-2 space-x-2 bg-gray-200">
+          <FontAwesome5 name="searchengin" size={25} color="gray" />
+          <TextInput placeholder="Restaurants and cuisines" keyboardType="default" />
+        </View>
+        <FontAwesome6 name="sliders" size={25} color="#00CCBB" className='ml-2'/>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default HomeScreen;
