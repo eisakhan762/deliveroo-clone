@@ -6,6 +6,7 @@ import Header from 'components/Header';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Categories from 'components/Categories';
+import FeaturedRow from 'components/FeaturedRow';
 const HomeScreen = () => {
   const navigation = useNavigation();
 
@@ -26,13 +27,34 @@ const HomeScreen = () => {
           <FontAwesome5 name="searchengin" size={25} color="gray" />
           <TextInput placeholder="Restaurants and cuisines" keyboardType="default" />
         </View>
-        <FontAwesome6 name="sliders" size={25} color="#00CCBB" className='ml-2'/>
+        <FontAwesome6 name="sliders" size={25} color="#00CCBB" className="ml-2" />
       </View>
 
       {/* body */}
       <ScrollView className="bg-gray-100" contentContainerStyle={{ paddingBottom: 100 }}>
         {/* Categories */}
-        <Categories /> 
+        <Categories />
+
+        {/* Featured */}
+        <FeaturedRow
+        id={"123"}
+          title="Featured"
+          description="Paid placements from our partners"
+        />
+
+        {/* Tasty Discount */}
+        <FeaturedRow
+          id={"1234"}
+          title="Tasty Discounts"
+          description="Paid placements from our partners"
+        />
+
+        {/* Offers Near You */}
+        <FeaturedRow
+          id={"12345"}
+          title="Offers Near You"
+          description="Why not support your local restaurant tonight!"
+        />
       </ScrollView>
     </SafeAreaView>
   );
