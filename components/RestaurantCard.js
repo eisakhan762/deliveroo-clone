@@ -10,6 +10,7 @@ import Foundation from '@expo/vector-icons/Foundation';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { urlFor } from 'sanity';
 
 const RestaurantCard = ({
   id,
@@ -51,11 +52,11 @@ const RestaurantCard = ({
       <Pressable
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
-        className="mr-4 overflow-hidden bg-white shadow-md rounded-xl"
+        className="w-64 mr-4 overflow-hidden bg-white shadow-md rounded-xl text-wrap"
       >
         {/* Image & Heart */}
         <View className="relative">
-          <Image source={{ uri: imgUrl }} className="w-64 h-36" />
+          <Image source={{ uri: urlFor(imgUrl).url() }} className="w-64 h-36"  resizeMode="cover" />
           <Pressable
             onPress={() => setIsFavorite(prev => !prev)}
             className="absolute p-1 rounded-full right-2 top-2 bg-white/80"
