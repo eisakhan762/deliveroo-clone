@@ -11,6 +11,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { urlFor } from 'sanity';
+import { useNavigation } from '@react-navigation/native';
 
 const RestaurantCard = ({
   id,
@@ -30,6 +31,7 @@ const RestaurantCard = ({
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
+  const navigation = useNavigation();
 
   const handlePressIn = () => {
     Animated.spring(scaleAnim, {
@@ -53,6 +55,20 @@ const RestaurantCard = ({
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         className="w-64 mr-4 overflow-hidden bg-white shadow-md rounded-xl text-wrap"
+        onPress={() => {
+          navigation.navigate('Restaurant', {
+            id,
+            title,
+            short_description,
+            imgUrl,
+            lat,
+            long,
+            rating,
+            genre,
+            address,
+            dishes,
+          })
+        }}
       >
         {/* Image & Heart */}
         <View className="relative">
