@@ -11,12 +11,15 @@ const FeaturedRow = ({ id, title, description }) => {
       .fetch(
         `
         *[_type == "featured" && _id == $id] {
-          ...,
-          restaurants[]->{
-            ...,
-            dishes[]->
-          }
-        }[0]
+      ...,
+      restaurants[]->{
+        ...,
+        type->{
+          name
+        },
+        dishes[]->
+      }
+    }[0]
       `,
         { id }
       )
@@ -56,7 +59,6 @@ const FeaturedRow = ({ id, title, description }) => {
             lat={restaurant.lat}
           />
         ))}
-        
 
         {/* <RestaurantCard
           id={123}
