@@ -32,7 +32,7 @@ const DishRow = ({ id, name, description, price, image }) => {
           </View>
           <View className="flex-row items-center">
             <Text className="mt-3 text-base font-bold text-green-600">₹ {price}</Text>
-            <Text className="mt-3 text-base text-gray-500"> X 4</Text>
+            <Text className="mt-3 text-base text-gray-500"> X {items.length} = ₹{items.length*price}</Text>
           </View>
         </View>
 
