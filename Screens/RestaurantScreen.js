@@ -6,6 +6,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
 import RestaurantHeader from 'components/RestaurantHeader';
 import DishRow from 'components/DishRow';
+import BasketIcon from 'components/BasketIcon';
 
 const RestaurantScreen = () => {
   const navigation = useNavigation();
@@ -19,45 +20,48 @@ const RestaurantScreen = () => {
     });
   }, []);
   return (
-    <ScrollView>
-      <View className="relative">
-        <Image
-          source={{
-            uri: urlFor(imgUrl).url(),
-          }}
-          className="w-full p-4 bg-gray-300 h-60"
-        />
-        <TouchableOpacity
-          className="absolute p-2 bg-gray-100 rounded-full left-5 top-10"
-          onPress={navigation.goBack}>
-          <AntDesign name="arrowleft" size={20} color="#00CCBB" />
-        </TouchableOpacity>
-      </View>
-
-      <RestaurantHeader
-        title={title}
-        short_description={short_description}
-        rating={rating}
-        genre={genre || 'General'}
-        address={address}
-      />
-
-      <View>
-        <Text className='px-4 pt-6 mb-3 text-xl font-bold'>Menu</Text>
-
-        {/* Dish rows */}
-        {dishes.map(dish => (
-          <DishRow 
-            key={dish._id}
-            id={dish._id}
-            name={dish.name}
-            description={dish.short_description}
-            price={dish.price}
-            image={dish.image}
+    <>
+      <BasketIcon />
+      <ScrollView>
+        <View className="relative">
+          <Image
+            source={{
+              uri: urlFor(imgUrl).url(),
+            }}
+            className="w-full p-4 bg-gray-300 h-60"
           />
-        ))}
-      </View>
-    </ScrollView>
+          <TouchableOpacity
+            className="absolute p-2 bg-gray-100 rounded-full left-5 top-10"
+            onPress={navigation.goBack}>
+            <AntDesign name="arrowleft" size={20} color="#00CCBB" />
+          </TouchableOpacity>
+        </View>
+
+        <RestaurantHeader
+          title={title}
+          short_description={short_description}
+          rating={rating}
+          genre={genre || 'General'}
+          address={address}
+        />
+
+        <View className='pb-20'>
+          <Text className="px-4 pt-6 mb-3 text-xl font-bold">Menu</Text>
+
+          {/* Dish rows */}
+          {dishes.map((dish) => (
+            <DishRow
+              key={dish._id}
+              id={dish._id}
+              name={dish.name}
+              description={dish.short_description}
+              price={dish.price}
+              image={dish.image}
+            />
+          ))}
+        </View>
+      </ScrollView>
+    </>
   );
 };
 
