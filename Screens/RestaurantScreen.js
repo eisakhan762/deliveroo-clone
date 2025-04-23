@@ -7,8 +7,9 @@ import Entypo from '@expo/vector-icons/Entypo';
 import RestaurantHeader from 'components/RestaurantHeader';
 import DishRow from 'components/DishRow';
 import BasketIcon from 'components/BasketIcon';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setRestaurant } from 'features/restaurantSlice';
+import { selectBasketItems } from 'features/basketSlice';
 
 const RestaurantScreen = () => {
   const navigation = useNavigation();
@@ -16,6 +17,8 @@ const RestaurantScreen = () => {
   const {
     params: { id, title, short_description, imgUrl, lat, long, rating, genre, address, dishes },
   } = useRoute();
+  const basketItems = useSelector(selectBasketItems)
+
 
   useEffect(() => {
     dispatch(setRestaurant({ id, imgUrl, title, short_description, rating, genre, address, dishes }));
@@ -52,7 +55,7 @@ const RestaurantScreen = () => {
           address={address}
         />
 
-        <View className="pb-20">
+        <View className={`${basketItems.length !== 0 ? 'pb-20' : ''}`}>
           <Text className="px-4 pt-6 mb-3 text-xl font-bold">Menu</Text>
 
           {/* Dish rows */}
