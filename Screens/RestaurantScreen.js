@@ -1,5 +1,5 @@
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { urlFor } from 'sanity';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -7,12 +7,19 @@ import Entypo from '@expo/vector-icons/Entypo';
 import RestaurantHeader from 'components/RestaurantHeader';
 import DishRow from 'components/DishRow';
 import BasketIcon from 'components/BasketIcon';
+import { useDispatch } from 'react-redux';
+import { setRestaurant } from 'features/restaurantSlice';
 
 const RestaurantScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const {
     params: { id, title, short_description, imgUrl, lat, long, rating, genre, address, dishes },
   } = useRoute();
+
+  useEffect(() => {
+    dispatch(setRestaurant({ id, imgUrl, title, short_description, rating, genre, address, dishes }));
+  }, [])
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -45,7 +52,7 @@ const RestaurantScreen = () => {
           address={address}
         />
 
-        <View className='pb-20'>
+        <View className="pb-20">
           <Text className="px-4 pt-6 mb-3 text-xl font-bold">Menu</Text>
 
           {/* Dish rows */}
