@@ -9,6 +9,8 @@ const BasketIcon = () => {
   const basketTotal = useSelector(selectBasketTotal);
   const navigation = useNavigation();
 
+  if (items.length === 0) return null; // Don't show the icon if there are no items in the basket
+
   return (
     <View className="absolute left-0 right-0 z-50 px-5 bottom-5">
       <TouchableOpacity
