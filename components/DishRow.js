@@ -3,7 +3,12 @@ import { urlFor } from 'sanity';
 import Entypo from '@expo/vector-icons/Entypo';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToBasket, removeFromBasket, selectBasketItems, selectBasketItemsWithId } from 'features/basketSlice';
+import {
+  addToBasket,
+  removeFromBasket,
+  selectBasketItems,
+  selectBasketItemsWithId,
+} from 'features/basketSlice';
 import PowerCartButton from './PowerCartButton';
 import * as Animatable from 'react-native-animatable';
 import StepperButton from './StepperButton';
@@ -19,8 +24,8 @@ const DishRow = ({ id, name, description, price, image }) => {
 
   const removeItemFromBasket = () => {
     if (!items.length > 0) return;
-    dispatch(removeFromBasket({id}))
-  }
+    dispatch(removeFromBasket({ id }));
+  };
   return (
     <View className="mx-4 mb-4 overflow-hidden bg-white shadow-sm rounded-xl">
       <View className="flex-row">
@@ -32,7 +37,12 @@ const DishRow = ({ id, name, description, price, image }) => {
           </View>
           <View className="flex-row items-center">
             <Text className="mt-3 text-base font-bold text-green-600">₹ {price}</Text>
-            <Text className="mt-3 text-base text-gray-500"> X {items.length} = ₹{items.length*price}</Text>
+            {items.length !== 0 && (
+              <Text className="mt-3 text-base text-gray-500">
+                {' '}
+                X {items.length} = ₹{items.length * price}
+              </Text>
+            )}
           </View>
         </View>
 
@@ -50,10 +60,9 @@ const DishRow = ({ id, name, description, price, image }) => {
           duration={500}
           easing="ease-out"
           className="bg-white">
-          <View
-            className="flex-row items-center gap-3 px-3 pt-0 pb-3 rounded-2xl">
+          <View className="flex-row items-center gap-3 px-3 pt-0 pb-3 rounded-2xl">
             {/* Minus */}
-            <StepperButton type="minus" onPress={removeItemFromBasket} length={items.length}/>
+            <StepperButton type="minus" onPress={removeItemFromBasket} length={items.length} />
 
             {/* Counter */}
             <Animatable.Text
